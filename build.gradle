@@ -3,7 +3,6 @@ apply plugin: 'application'
 
 buildscript {
     repositories {
-        maven { url "http://120.26.128.195:3001/nexus/content/groups/public/" }
         jcenter()
         maven { url "http://repo.spring.io/snapshot" }
         maven { url "http://repo.spring.io/milestone" }
@@ -17,7 +16,6 @@ mainClassName = 'com.springboot.api.Application'
 
 allprojects {
     repositories {
-        maven { url "http://120.26.128.195:3001/nexus/content/groups/public/" }
         jcenter()
         maven { url "http://repo.spring.io/snapshot" }
         maven { url "http://repo.spring.io/milestone" }
