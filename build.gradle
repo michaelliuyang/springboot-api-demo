@@ -1,0 +1,48 @@
+apply from: 'dependencyDefinitions.gradle'
+apply plugin: 'application'
+
+buildscript {
+    repositories {
+        maven { url "http://120.26.128.195:3001/nexus/content/groups/public/" }
+        jcenter()
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE")
+    }
+}
+
+mainClassName = 'com.springboot.api.Application'
+
+allprojects {
+    repositories {
+        maven { url "http://120.26.128.195:3001/nexus/content/groups/public/" }
+        jcenter()
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+    }
+    version = '1.0'
+    group = 'com.springboot.api'
+}
+
+subprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'spring-boot'
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+    configurations {
+        all*.exclude module: 'hibernate-validator'
+        all*.exclude module: 'spring-boot-starter-logging'
+    }
+
+    dependencies {
+        testCompile(
+                libraries.'spring-boot-starter-test'
+        )
+    }
+
+}

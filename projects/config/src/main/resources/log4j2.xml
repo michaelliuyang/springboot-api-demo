@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="OFF">
+
+    <Properties>
+        <Property name="rootLoggerLevel">INFO</Property>
+        <Property name="bizLoggerLevel">INFO</Property>
+        <Property name="exceptionLoggerLevel">ERROR</Property>
+        <!-- 日志根目录 -->
+        <Property name="baseLogPath">/tmp/springboot-api-demo-log</Property>
+        <Property name="commonLogPath">${baseLogPath}/common</Property>
+        <!-- 日志格式 -->
+        <Property name="logPattern">%d{yyyy-MM-dd HH:mm:ss:SSS} - %p - %msg%ex%n</Property>
+        <Property name="hadoopLogPattern">%msg%n</Property>
+        <!-- 按 XXX(这里是按天) 循环的日志格式
+            注：这里如果想用按照小时为单位，请修改成 %d{yyyy-MM-dd-HH}，
+            这样下面的TimeBasedTriggeringPolicy的interval的单位就变成小时了 -->
+        <Property name="dailyRollingFilePattern">%d{yyyy-MM-dd}</Property>
+        <Property name="hourRollingFilePattern">%d{yyyy-MM-dd-HH}</Property>
+
+        <Property name="exceptionLogFileName">${commonLogPath}/Exception_DailyRolling.log</Property>
+        <Property name="timerCalculatorLogFileName">${commonLogPath}/timerCalculator_HourRolling.log</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- 控制台输出，请在调试环境下使用 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${logPattern}"/>
+        </Console>
+
+        <RollingFile name="timerCalculator_LogAppender" fileName="${timerCalculatorLogFileName}"
+                     filePattern="${timerCalculatorLogFileName}.${hourRollingFilePattern}">
+            <PatternLayout pattern="${logPattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="exception_LogAppender" fileName="${exceptionLogFileName}"
+                     filePattern="${exceptionLogFileName}.${dailyRollingFilePattern}">
+            <PatternLayout pattern="${logPattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <ThresholdFilter level="${exceptionLoggerLevel}" onMatch="ACCEPT" onMismatch="DENY"/>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+        <Logger name="timerCalculator_Logger" level="${bizLoggerLevel}" additivity="false">
+            <appender-ref ref="timerCalculator_LogAppender"/>
+        </Logger>
+
+        <!-- 根输出流配置,当Logger配置的additivity=true时起作用,会收集所配置Logger的流到这里,
+             请在调试环境下使用 -->
+        <Root level="${rootLoggerLevel}">
+            <appender-ref ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

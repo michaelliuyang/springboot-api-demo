@@ -1,0 +1,8 @@
+server:
+  port: 8080
+  context-path: /
+
+logging:
+  file: /tmp/springboot-api-demo-log/demo.log
+  level:
+    root: INFO

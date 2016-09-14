@@ -1,0 +1,14 @@
+archivesBaseName = 'app'
+
+dependencies {
+
+    compile(
+            libraries.'spring-boot-starter-web',
+            libraries.'spring-boot-starter-aop',
+            libraries.'spring-boot-starter-actuator',
+            project(':projects/tools'),
+            project(':projects/config'),
+            project(':projects/core')
+    )
+
+}

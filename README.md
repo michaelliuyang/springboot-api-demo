@@ -1,2 +1,2 @@
-# springboot-api-demo
-springboot的api rest服务的demo
+# spring-boot-api-demo
+spring-boot的API服务的demo(gradle构建)

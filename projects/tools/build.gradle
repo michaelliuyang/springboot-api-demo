@@ -1,0 +1,13 @@
+archivesBaseName = 'tools'
+
+dependencies {
+
+    compile(
+            libraries.'spring-boot-starter-log4j2',
+            libraries.'commons-codec',
+            libraries.'commons-lang3',
+            libraries.'commons-io',
+            libraries.'servlet-api'
+    )
+
+}

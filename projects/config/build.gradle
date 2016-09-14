@@ -1,0 +1,7 @@
+archivesBaseName = 'config'
+
+dependencies {
+    compile(
+            libraries.'spring-boot-starter'
+    )
+}

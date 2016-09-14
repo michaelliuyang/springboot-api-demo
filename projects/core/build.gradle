@@ -1,0 +1,15 @@
+archivesBaseName = 'core'
+
+dependencies {
+
+    compile(
+            libraries.'spring-boot-configuration-processor',
+            libraries.'spring-boot-mybaits',
+            libraries.'mysql-driven',
+            libraries.'dbcp',
+            libraries.'jedis',
+            project(':projects/config'),
+            project(':projects/tools')
+    )
+
+}
