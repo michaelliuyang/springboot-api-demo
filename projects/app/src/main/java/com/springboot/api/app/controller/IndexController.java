@@ -8,14 +8,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("")
-public class MonitorController {
+public class IndexController {
 
     @Autowired
     private MonitorService monitorService;
 
     @RequestMapping(value = "monitor", method = RequestMethod.GET)
+    public String monitor() {
+        return "db:" + monitorService.monitorDB() + " , cache:" + monitorService.monitorCache();
+    }
+
+    @RequestMapping(value = {"/", "index"}, method = RequestMethod.GET)
     public String index() {
-        return "db:" + monitorService.monitorDB() + ",cache:" + monitorService.monitorCache();
+        return "Hello Spring Boot";
     }
 
 }
